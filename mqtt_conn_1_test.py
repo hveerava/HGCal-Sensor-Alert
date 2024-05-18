@@ -21,11 +21,13 @@ def on_connect(client, userdata, flags, rc):
         print(f"Subscribing to {ADAFRUIT_IO_USERNAME}/feeds/{FEED_TEMPERATURE}")
         # Subscribe to the temperature feed
         client.subscribe(f"{ADAFRUIT_IO_USERNAME}/feeds/{FEED_TEMPERATURE}")
+        print("--------1--------Reached here--------1--------")
     else:
         print(f"Connection failed with result code {rc}. Check your username and AIO key.")
 
 # Callback function on message
 def on_message(client, userdata, msg):
+    print("Message received")
     global latest_temperature
     
     topic = msg.topic.split('/')[-1]
@@ -36,15 +38,17 @@ def on_message(client, userdata, msg):
     if topic == FEED_TEMPERATURE:
         latest_temperature = payload
         print(f"Latest temperature: {latest_temperature}")
+    else:
+        print("Message topic is not temperature")
 
 # Setup MQTT client
 client = mqtt.Client()
 client.username_pw_set(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 client.on_connect = on_connect
 client.on_message = on_message
-
+print("--------3--------Reached here--------3--------")
 # Connect to the MQTT broker
-client.connect(MQTT_BROKER, MQTT_PORT, 60)
+client.connect(MQTT_BROKER, MQTT_PORT, 5)
 
 # Start the loop
 client.loop_start()
@@ -54,6 +58,7 @@ try:
     while True:
         pass
 except KeyboardInterrupt:
+    print("--------4--------Reached here--------4--------")
     print("Disconnecting from broker")
     client.loop_stop()
     client.disconnect()
