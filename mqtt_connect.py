@@ -55,3 +55,6 @@ except KeyboardInterrupt:
     print("Disconnecting from broker")
     client.loop_stop()
     client.disconnect()
+
+# problem: sensor not sending any data to adafruit dashboard. not reflecting.
+# configure raspi and enviro to relay data to dashboard and set alert system
