@@ -1,8 +1,8 @@
 import paho.mqtt.client as mqtt
 
 # Adafruit IO credentials
-ADAFRUIT_IO_USERNAME = 'jparshook'   # Replace with your Adafruit IO username
-ADAFRUIT_IO_KEY = 'aio_pQCI91TyV3iHZovMtPwbRQQ1FELa'         # Replace with your Adafruit IO key
+ADAFRUIT_AIO_USERNAME = "cmu_hgcal"
+ADAFRUIT_AIO_KEY      = "aio_mTOq92d8aNpunglIUM4gcTqqzewT"
 
 # MQTT broker settings
 MQTT_BROKER = 'io.adafruit.com'
@@ -23,9 +23,9 @@ def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected successfully")
         # Subscribe to the feeds
-        client.subscribe(f"{ADAFRUIT_IO_USERNAME}/feeds/{FEED_TEMPERATURE}")
-        client.subscribe(f"{ADAFRUIT_IO_USERNAME}/feeds/{FEED_HUMIDITY}")
-        client.subscribe(f"{ADAFRUIT_IO_USERNAME}/feeds/{FEED_PARTICULATE}")
+        client.subscribe(f"{ADAFRUIT_AIO_USERNAME}/feeds/{FEED_TEMPERATURE}")
+        client.subscribe(f"{ADAFRUIT_AIO_USERNAME}/feeds/{FEED_HUMIDITY}")
+        client.subscribe(f"{ADAFRUIT_AIO_USERNAME}/feeds/{FEED_PARTICULATE}")
     else:
         print(f"Connection failed with result code {rc}. Check your username and AIO key.")
 
@@ -52,7 +52,7 @@ def on_message(client, userdata, msg):
 
 # Setup MQTT client
 client = mqtt.Client()
-client.username_pw_set(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
+client.username_pw_set(ADAFRUIT_AIO_USERNAME, ADAFRUIT_AIO_KEY)
 client.on_connect = on_connect
 client.on_message = on_message
 
