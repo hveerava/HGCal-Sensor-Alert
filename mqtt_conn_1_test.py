@@ -1,8 +1,7 @@
 import paho.mqtt.client as mqtt
 
 # Adafruit IO credentials
-#ADAFRUIT_AIO_USERNAME = ""
-#ADAFRUIT_AIO_KEY      = ""
+
 
 # MQTT broker settings
 MQTT_BROKER = 'io.adafruit.com'
